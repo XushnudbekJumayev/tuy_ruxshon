@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xolmurod va Ruxshona — To'y Taklifi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy: #800020;
+    --burgundy-dark: #5a0018;
+    --burgundy-light: #a0002a;
+    --gold: #D4AF37;
+    --gold-light: #e8c84a;
+    --gold-dark: #b8941e;
+    --ivory: #FAF6EE;
+    --ivory-dark: #f0e8d8;
+    --cream: #FDF8F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    background-color: var(--ivory);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    color: var(--burgundy-dark);
+  }
+
+  /* ========== CANVAS PARTICLES ========== */
+  #particles-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ========== SECTION BASE ========== */
+  .section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ========== PART 1: ENVELOPE ========== */
+  #envelope-section {
+    background: linear-gradient(160deg, var(--ivory) 0%, var(--ivory-dark) 50%, #e8dcc8 100%);
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .invitation-text {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    letter-spacing: 0.3em;
+    color: var(--burgundy);
+    text-align: center;
+    text-transform: uppercase;
+    opacity: 0.85;
+    padding: 0 20px;
+  }
+
+  .envelope-wrapper {
+    position: relative;
+    width: clamp(280px, 80vw, 500px);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .envelope-wrapper:hover { transform: scale(1.02); }
+
+  .envelope-body {
+    width: 100%;
+    padding-top: 65%;
+    position: relative;
+    background: linear-gradient(135deg, #f5ede0 0%, #ede0cc 50%, #e8d8c0 100%);
+    border-radius: 4px 4px 8px 8px;
+    box-shadow:
+      0 20px 60px rgba(128,0,32,0.2),
+      0 4px 15px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    border: 1px solid rgba(212,175,55,0.4);
+    overflow: hidden;
+    transform-style: preserve-3d;
+  }
+
+  /* Envelope side lines */
+  .envelope-body::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100%;
+    background:
+      linear-gradient(135deg, transparent 49.5%, rgba(212,175,55,0.25) 49.5%, rgba(212,175,55,0.25) 50.5%, transparent 50.5%),
+      linear-gradient(225deg, transparent 49.5%, rgba(212,175,55,0.25) 49.5%, rgba(212,175,55,0.25) 50.5%, transparent 50.5%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Flap */
+  .envelope-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+  }
+
+  .flap-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    clip-path: polygon(0 0, 50% 75%, 100% 0);
+    background: linear-gradient(160deg, #f2e8d5 0%, #e8dcc8 60%, #ddd0ba 100%);
+    border-top: 1px solid rgba(212,175,55,0.4);
+    border-left: 1px solid rgba(212,175,55,0.3);
+    border-right: 1px solid rgba(212,175,55,0.3);
+  }
+
+  .flap-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    clip-path: polygon(0 0, 50% 75%, 100% 0);
+    background: linear-gradient(160deg, #e8d5bf 0%, #d4c4a8 100%);
+    transform: rotateX(180deg);
+  }
+
+  .envelope-flap.open {
+    transform: rotateX(-180deg);
+  }
+
+  /* Wax seal */
+  .wax-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(70px, 18vw, 110px);
+    height: clamp(70px, 18vw, 110px);
+    z-index: 10;
+    cursor: pointer;
+    border-radius: 50%;
+    animation: sealBreath 2.5s ease-in-out infinite;
+    transition: transform 0.3s ease, opacity 0.5s ease;
+  }
+
+  .wax-seal img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 12px rgba(128,0,32,0.3));
+  }
+
+  @keyframes sealBreath {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); }
+    50% { transform: translate(-50%, -50%) scale(1.06); filter: brightness(1.08); }
+  }
+
+  .wax-seal.clicked {
+    animation: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  .envelope-wrapper.slide-down {
+    animation: envelopeSlideDown 1s cubic-bezier(0.4, 0, 0.6, 1) 0.8s forwards;
+  }
+
+  @keyframes envelopeSlideDown {
+    to { transform: translateY(120vh) scale(0.8); opacity: 0; }
+  }
+
+  .invitation-text.slide-down {
+    animation: envelopeSlideDown 0.8s ease 0.6s forwards;
+  }
+
+  /* ========== PART 2: MAIN CONTENT ========== */
+  #main-section {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--ivory) 100%);
+    padding: 0 20px 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  #main-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ornament-header {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .ornament-header img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 120px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .couple-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.5rem, 9vw, 5rem);
+    color: var(--burgundy);
+    text-align: center;
+    margin: 20px 0 30px;
+    text-shadow: 1px 1px 0 rgba(212,175,55,0.3);
+    line-height: 1.2;
+  }
+
+  .couple-names span {
+    color: var(--gold-dark);
+  }
+
+  .couple-container {
+    position: relative;
+    width: clamp(260px, 70vw, 420px);
+    margin: 0 auto;
+  }
+
+  .couple-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 30px rgba(128,0,32,0.2));
+  }
+
+  .instrument-overlay {
+    position: absolute;
+    top: 2%;
+    right: -12%;
+    width: 45%;
+    transform-origin: center center;
+    animation: instrumentPulse 1.8s ease-in-out infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  }
+
+  .instrument-overlay img { width: 100%; height: auto; }
+
+  @keyframes instrumentPulse {
+    0%, 100% { transform: scale(1) rotate(-5deg); }
+    25% { transform: scale(1.06) rotate(-3deg); }
+    50% { transform: scale(1.03) rotate(-6deg); }
+    75% { transform: scale(1.08) rotate(-4deg); }
+  }
+
+  .scroll-down-btn {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--burgundy);
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+  }
+
+  .scroll-down-btn .arrow {
+    font-size: 1.5rem;
+    color: var(--gold);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ========== PART 3: LETTER CARD ========== */
+  #letter-section {
+    background: linear-gradient(160deg, var(--ivory-dark) 0%, var(--cream) 100%);
+    padding: 60px 20px;
+  }
+
+  .letter-card {
+    background: linear-gradient(145deg, #fff9f0 0%, #fdf4e3 100%);
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 2px;
+    padding: clamp(30px, 6vw, 60px) clamp(25px, 6vw, 55px);
+    max-width: 650px;
+    width: 100%;
+    box-shadow:
+      0 2px 30px rgba(128,0,32,0.08),
+      0 0 0 8px rgba(212,175,55,0.06),
+      inset 0 0 40px rgba(255,255,255,0.5);
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .letter-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .letter-card::before, .letter-card::after {
+    content: '❧';
+    position: absolute;
+    color: var(--gold);
+    font-size: 1.5rem;
+    opacity: 0.5;
+  }
+  .letter-card::before { top: 15px; left: 20px; }
+  .letter-card::after { bottom: 15px; right: 20px; transform: rotate(180deg); }
+
+  .letter-greeting {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--burgundy);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .letter-body {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 1.9;
+    color: #4a2020;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .letter-signature {
+    margin-top: 30px;
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    color: var(--burgundy);
+    text-align: right;
+  }
+
+  .letter-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 20px auto;
+    opacity: 0.6;
+  }
+
+  /* ========== PART 4: CALENDAR ========== */
+  #calendar-section {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--ivory) 100%);
+    padding: 60px 20px;
+    position: relative;
+  }
+
+  .calendar-container {
+    width: 100%;
+    max-width: 620px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .calendar-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Corner pomegranate decorations */
+  .corner-decor {
+    position: absolute;
+    width: clamp(70px, 18vw, 110px);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .corner-decor.tl { top: -30px; left: -30px; transform: scaleX(-1); }
+  .corner-decor.tr { top: -30px; right: -30px; }
+  .corner-decor.bl { bottom: -30px; left: -30px; transform: scale(-1, 1); }
+  .corner-decor.br { bottom: -30px; right: -30px; transform: scaleY(-1); }
+
+  .calendar-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    letter-spacing: 0.2em;
+    color: var(--burgundy);
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .calendar-subtitle {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--gold-dark);
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .calendar-grid {
+    background: linear-gradient(145deg, #fff9f0, #fdf4e3);
+    border: 1px solid rgba(212,175,55,0.35);
+    border-radius: 4px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 30px rgba(128,0,32,0.08);
+  }
+
+  .cal-header {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    letter-spacing: 0.15em;
+    color: var(--burgundy);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .cal-weekday {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+    color: var(--gold-dark);
+    letter-spacing: 0.05em;
+    padding: 6px 0;
+    text-transform: uppercase;
+  }
+
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.8rem, 2.2vw, 1rem);
+    font-weight: 300;
+    color: var(--burgundy-dark);
+    border-radius: 2px;
+    position: relative;
+    cursor: default;
+    transition: background 0.2s;
+  }
+
+  .cal-day.empty { color: transparent; }
+
+  .cal-day.weekend { color: rgba(128,0,32,0.5); }
+
+  .cal-day.special {
+    z-index: 1;
+  }
+
+  .cal-day.special .day-number {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-weight: 400;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .heart-bg {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heartGlow 2s ease-in-out infinite;
+  }
+
+  .heart-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(212,175,55,0.6));
+  }
+
+  @keyframes heartGlow {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.08); filter: brightness(1.15); }
+  }
+
+  /* Location */
+  .location-block {
+    margin-top: 30px;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(212,175,55,0.3);
+  }
+
+  .location-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--burgundy);
+    margin-bottom: 8px;
+  }
+
+  .location-detail {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+    letter-spacing: 0.15em;
+    color: #6a3030;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .map-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .map-btn {
+    padding: 10px 22px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.65rem, 1.8vw, 0.78rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .map-btn.yandex {
+    background: var(--burgundy);
+    color: var(--gold-light);
+    border: 1px solid var(--burgundy-light);
+  }
+  .map-btn.google {
+    background: transparent;
+    color: var(--burgundy);
+    border: 1px solid var(--gold);
+  }
+
+  .map-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(128,0,32,0.3);
+  }
+
+  .map-btn.yandex:hover { background: var(--burgundy-light); }
+  .map-btn.google:hover { background: var(--gold); color: var(--burgundy-dark); }
+
+  /* ========== PART 5: COUNTDOWN & FINALE ========== */
+  #finale-section {
+    background: linear-gradient(160deg, var(--burgundy-dark) 0%, #600018 50%, #3d0010 100%);
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #finale-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Rings */
+  .rings-container {
+    position: relative;
+    width: 120px;
+    height: 80px;
+    margin: 0 auto 40px;
+  }
+
+  .ring {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 6px solid var(--gold);
+    box-shadow:
+      0 0 20px rgba(212,175,55,0.4),
+      inset 0 0 15px rgba(212,175,55,0.1);
+  }
+
+  .ring1 {
+    left: 0; top: 5px;
+    animation: ring1Shine 3s ease-in-out infinite;
+    background: radial-gradient(circle at 30% 30%, rgba(212,175,55,0.15), transparent);
+  }
+
+  .ring2 {
+    right: 0; top: 5px;
+    animation: ring2Shine 3s ease-in-out infinite 1.5s;
+    background: radial-gradient(circle at 70% 30%, rgba(212,175,55,0.15), transparent);
+  }
+
+  @keyframes ring1Shine {
+    0%, 100% { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.3); }
+    50% { border-color: var(--gold-light); box-shadow: 0 0 30px rgba(212,175,55,0.7), 0 0 60px rgba(212,175,55,0.2); }
+  }
+
+  @keyframes ring2Shine {
+    0%, 100% { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.3); }
+    50% { border-color: var(--gold-light); box-shadow: 0 0 30px rgba(212,175,55,0.7), 0 0 60px rgba(212,175,55,0.2); }
+  }
+
+  .countdown-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-align: center;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 25px;
+  }
+
+  .countdown-grid {
+    display: flex;
+    gap: clamp(12px, 3vw, 25px);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .countdown-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    min-width: clamp(60px, 15vw, 90px);
+    text-align: center;
+    text-shadow: 0 0 30px rgba(212,175,55,0.3);
+    position: relative;
+  }
+
+  .countdown-number::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: rgba(212,175,55,0.4);
+  }
+
+  .countdown-unit-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+    letter-spacing: 0.2em;
+    color: rgba(212,175,55,0.6);
+    text-transform: uppercase;
+  }
+
+  .countdown-sep {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: rgba(212,175,55,0.4);
+    align-self: flex-start;
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  .finale-waiting {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--gold-light);
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(212,175,55,0.3);
+  }
+
+  .finale-pom {
+    width: clamp(80px, 20vw, 130px);
+    margin: 0 auto 25px;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(212,175,55,0.2)) brightness(1.1);
+    animation: pomRotate 6s ease-in-out infinite;
+  }
+
+  @keyframes pomRotate {
+    0%, 100% { transform: rotate(-3deg) scale(1); }
+    50% { transform: rotate(3deg) scale(1.04); }
+  }
+
+  .finale-credit {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+    letter-spacing: 0.3em;
+    color: rgba(212,175,55,0.4);
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* ========== TRANSITIONS FOR SCROLL REVEAL ========== */
+  .fade-slide-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .fade-slide-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ========== AUDIO NOTICE ========== */
+  .audio-notice {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(128,0,32,0.9);
+    color: var(--gold-light);
+    padding: 8px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    border-radius: 2px;
+    z-index: 100;
+    display: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid rgba(212,175,55,0.3);
+  }
+  .audio-notice.show { display: block; }
+
+  /* Mobile refinements */
+  @media (max-width: 480px) {
+    .instrument-overlay { right: -8%; width: 38%; }
+    .corner-decor { width: 55px; }
+    .corner-decor.tl { top: -20px; left: -20px; }
+    .corner-decor.tr { top: -20px; right: -20px; }
+    .corner-decor.bl { bottom: -20px; left: -20px; }
+    .corner-decor.br { bottom: -20px; right: -20px; }
+  }
+
+  /* Shimmer line */
+  .gold-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 15px auto;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<button class="audio-notice" id="audio-notice" onclick="toggleAudio()">♪ Musiqa</button>
+
+<!-- PART 1: ENVELOPE -->
+<section class="section" id="envelope-section">
+  <p class="invitation-text" id="invite-text">Sizni to'yimizga taklif etamiz</p>
+
+  <div class="envelope-wrapper" id="envelope-wrapper">
+    <div class="envelope-body" id="envelope-body">
+      <div class="envelope-flap" id="envelope-flap">
+        <div class="flap-front"></div>
+        <div class="flap-inner"></div>
+      </div>
+      <!-- Wax Seal -->
+      <div class="wax-seal" id="wax-seal" onclick="openEnvelope()">
+        <img src="gold wax seal.png" alt="Mum muhri">
+      </div>
+    </div>
+  </div>
+  <div class="gold-line" style="margin-top:20px; opacity:0.5;"></div>
+  <p style="font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:var(--burgundy); opacity:0.6; letter-spacing:0.1em; font-style:italic;">Muhrai bosing</p>
+</section>
+
+<!-- PART 2: MAIN CONTENT -->
+<section class="section" id="main-section">
+  <div class="ornament-header">
+    <img src="border ornament.png" alt="Bezak chegara">
+  </div>
+
+  <h1 class="couple-names">Xolmurod <span>&</span> Ruxshona</h1>
+
+  <div class="couple-container">
+    <img src="couple.png" alt="Juftlik" class="couple-img">
+    <div class="instrument-overlay">
+      <img src="musicInstrument.png" alt="Musiqa asbobi">
+    </div>
+  </div>
+
+  <button class="scroll-down-btn" onclick="scrollToNext('letter-section')">
+    <span style="letter-spacing:0.2em;">Davom etish</span>
+    <span class="arrow">↓</span>
+  </button>
+</section>
+
+<!-- PART 3: LETTER -->
+<section class="section" id="letter-section">
+  <div class="letter-card" id="letter-card">
+    <p class="letter-greeting">Aziz va qadrdon insonimiz...</p>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      Hayotimizning eng muborak kunida — nikoh to'yimizda — sizni mehmon sifatida ko'rishdan baxtiyor bo'lamiz.
+      <br><br>
+      Sizning tashrif buyurishingiz bayramimizga yanada nur va shodlik bag'ishlaydi. Dilimizdan chiqayotgan bu taklif — sizga bo'lgan hurmat va muhabbatimizning belgisidir.
+      <br><br>
+      Siz bizning hayotimizda alohida o'ringa egasiz. Shu sababli, bu muhim kunni aynan siz bilan baham ko'rishni istaymiz.
+    </p>
+    <div class="letter-divider"></div>
+    <p class="letter-signature">Xolmurod va Ruxshona</p>
+  </div>
+  <button class="scroll-down-btn" onclick="scrollToNext('calendar-section')" style="margin-top:30px;">
+    <span style="letter-spacing:0.2em;">Tarix</span>
+    <span class="arrow">↓</span>
+  </button>
+</section>
+
+<!-- PART 4: CALENDAR -->
+<section class="section" id="calendar-section">
+  <div class="calendar-container" id="calendar-container">
+    <!-- Corner pomegranates -->
+    <img src="pomegranate.png" alt="" class="corner-decor tl">
+    <img src="pomegranate.png" alt="" class="corner-decor tr">
+    <img src="pomegranate.png" alt="" class="corner-decor bl">
+    <img src="pomegranate.png" alt="" class="corner-decor br">
+
+    <p class="calendar-title">To'y sanasi</p>
+    <p class="calendar-subtitle">April 2026</p>
+
+    <div class="calendar-grid">
+      <p class="cal-header">Aprel 2026</p>
+
+      <div class="cal-weekdays">
+        <div class="cal-weekday">Du</div>
+        <div class="cal-weekday">Se</div>
+        <div class="cal-weekday">Ch</div>
+        <div class="cal-weekday">Pa</div>
+        <div class="cal-weekday">Ju</div>
+        <div class="cal-weekday" style="color:var(--burgundy)">Sh</div>
+        <div class="cal-weekday" style="color:var(--burgundy)">Ya</div>
+      </div>
+
+      <div class="cal-days" id="calendar-days"></div>
+    </div>
+
+    <!-- Location -->
+    <div class="location-block">
+      <p class="location-name">Afsona To'yxonasi</p>
+      <p class="location-detail">Soat 18:00 · 11 Aprel 2026</p>
+      <div class="map-buttons">
+        <a class="map-btn yandex" href="https://yandex.uz/maps/?text=Afsona+To'yxonasi+Toshkent" target="_blank">
+          🗺 Yandex Xarita
+        </a>
+        <a class="map-btn google" href="https://maps.google.com/?q=Afsona+Toyxonasi+Tashkent" target="_blank">
+          📍 Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5: COUNTDOWN & FINALE -->
+<section class="section" id="finale-section">
+  <div class="rings-container">
+    <div class="ring ring1"></div>
+    <div class="ring ring2"></div>
+  </div>
+
+  <p class="countdown-label fade-slide-up">To'yga qadar</p>
+
+  <div class="countdown-grid fade-slide-up">
+    <div class="countdown-unit">
+      <div class="countdown-number" id="cd-days">00</div>
+      <div class="countdown-unit-label">Kun</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-number" id="cd-hours">00</div>
+      <div class="countdown-unit-label">Soat</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-number" id="cd-mins">00</div>
+      <div class="countdown-unit-label">Daqiqa</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit">
+      <div class="countdown-number" id="cd-secs">00</div>
+      <div class="countdown-unit-label">Soniya</div>
+    </div>
+  </div>
+
+  <p class="finale-waiting fade-slide-up">Sizni intiqlik bilan kutamiz</p>
+
+  <img src="flowerUzb.png" alt="Bezak gul" class="finale-pom fade-slide-up">
+
+  <div class="gold-line fade-slide-up"></div>
+  <p class="finale-credit fade-slide-up">By Xushnudbek</p>
+</section>
+
+<script>
+// ========== PARTICLES ==========
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.speedY = -(Math.random() * 0.4 + 0.1);
+    this.speedX = (Math.random() - 0.5) * 0.2;
+    this.opacity = 0;
+    this.maxOpacity = Math.random() * 0.5 + 0.1;
+    this.fadeIn = true;
+    this.life = 0;
+    this.maxLife = Math.random() * 200 + 100;
+  }
+  update() {
+    this.life++;
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.fadeIn) {
+      this.opacity = Math.min(this.maxOpacity, this.opacity + 0.005);
+      if (this.opacity >= this.maxOpacity) this.fadeIn = false;
+    } else {
+      this.opacity = Math.max(0, this.opacity - 0.003);
+    }
+    if (this.life > this.maxLife || this.y < 0 || this.opacity <= 0) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = '#D4AF37';
+    ctx.shadowBlur = 4;
+    ctx.shadowColor = 'rgba(212,175,55,0.6)';
+    // Draw star
+    ctx.beginPath();
+    const spikes = 4;
+    const outerR = this.size;
+    const innerR = this.size * 0.4;
+    for (let i = 0; i < spikes * 2; i++) {
+      const angle = (i * Math.PI) / spikes - Math.PI / 2;
+      const r = i % 2 === 0 ? outerR : innerR;
+      if (i === 0) ctx.moveTo(this.x + r * Math.cos(angle), this.y + r * Math.sin(angle));
+      else ctx.lineTo(this.x + r * Math.cos(angle), this.y + r * Math.sin(angle));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 60; i++) {
+  const p = new Particle();
+  p.y = Math.random() * canvas.height;
+  p.life = Math.floor(Math.random() * p.maxLife);
+  particles.push(p);
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ========== AUDIO ==========
+let audio = null;
+let audioStarted = false;
+
+function startAudio() {
+  if (audioStarted) return;
+  // Create a simple tone-based melody since we can't load external files
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    audio = new AudioCtx();
+    playMelody();
+    audioStarted = true;
+    document.getElementById('audio-notice').classList.add('show');
+  } catch(e) {}
+}
+
+let melodyPlaying = false;
+let melodyNodes = [];
+
+function playMelody() {
+  if (!audio || melodyPlaying) return;
+  melodyPlaying = true;
+  // Traditional Uzbek-inspired melody notes (frequencies)
+  const notes = [392, 440, 494, 523, 494, 440, 392, 349, 392, 440, 523, 587, 523, 440, 392, 330];
+  const duration = 0.5;
+  let time = audio.currentTime;
+
+  function scheduleNext(index) {
+    if (!melodyPlaying) return;
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(notes[index % notes.length], time);
+    gain.gain.setValueAtTime(0, time);
+    gain.gain.linearRampToValueAtTime(0.06, time + 0.05);
+    gain.gain.linearRampToValueAtTime(0.04, time + duration * 0.7);
+    gain.gain.linearRampToValueAtTime(0, time + duration);
+    osc.start(time);
+    osc.stop(time + duration);
+    time += duration * 0.8;
+    melodyNodes.push(osc);
+    setTimeout(() => scheduleNext(index + 1), duration * 800 * 0.7);
+  }
+  scheduleNext(0);
+}
+
+function toggleAudio() {
+  if (!audio) return;
+  if (audio.state === 'running') {
+    audio.suspend();
+    document.getElementById('audio-notice').textContent = '♪ Musiqa (to\'xtatildi)';
+    melodyPlaying = false;
+  } else {
+    audio.resume();
+    document.getElementById('audio-notice').textContent = '♪ Musiqa';
+    melodyPlaying = true;
+    playMelody();
+  }
+}
+
+// ========== ENVELOPE ==========
+let envelopeOpened = false;
+
+function openEnvelope() {
+  if (envelopeOpened) return;
+  envelopeOpened = true;
+
+  const seal = document.getElementById('wax-seal');
+  const flap = document.getElementById('envelope-flap');
+  const wrapper = document.getElementById('envelope-wrapper');
+  const inviteText = document.getElementById('invite-text');
+  const mainSection = document.getElementById('main-section');
+
+  // Seal animation
+  seal.classList.add('clicked');
+
+  // Flap opens after short delay
+  setTimeout(() => {
+    flap.classList.add('open');
+    startAudio();
+  }, 400);
+
+  // Envelope slides down after flap opens
+  setTimeout(() => {
+    wrapper.classList.add('slide-down');
+    inviteText.classList.add('slide-down');
+  }, 1400);
+
+  // Reveal Part 2
+  setTimeout(() => {
+    mainSection.style.display = 'flex';
+    mainSection.classList.add('visible');
+    mainSection.scrollIntoView({ behavior: 'smooth' });
+  }, 2200);
+}
+
+// ========== SCROLL NAVIGATION ==========
+function scrollToNext(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ========== INTERSECTION OBSERVER ==========
+const observerOptions = { threshold: 0.2 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-slide-up, #letter-card, #calendar-container').forEach(el => {
+  observer.observe(el);
+});
+
+// ========== CALENDAR ==========
+function buildCalendar() {
+  const container = document.getElementById('calendar-days');
+  // April 2026 starts on Wednesday (day index 2, Monday=0)
+  const startDay = 2; // Wednesday
+  const daysInMonth = 30;
+  const weekends = [6, 7]; // Saturday=6 (col index 5), Sunday=7 (col index 6) — using Mon-start
+
+  // Empty cells
+  for (let i = 0; i < startDay; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    container.appendChild(empty);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const div = document.createElement('div');
+    const dayOfWeek = (startDay + d - 1) % 7; // 0=Mon...5=Sat,6=Sun
+
+    if (d === 11) {
+      div.className = 'cal-day special';
+      div.innerHTML = `
+        <div class="heart-bg">
+          <img src="gold heart.png" alt="Yurak">
+        </div>
+        <span class="day-number">11</span>
+      `;
+    } else {
+      div.className = 'cal-day' + (dayOfWeek >= 5 ? ' weekend' : '');
+      div.textContent = d;
+    }
+    container.appendChild(div);
+  }
+}
+buildCalendar();
+
+// ========== COUNTDOWN ==========
+function updateCountdown() {
+  const target = new Date('2026-04-11T18:00:00');
+  const now = new Date();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
