@@ -72,11 +72,11 @@ const LOCALES = {
   },
   uz: {
     pageTitle: "Xolmurod  va Ruxshona | To'y taklifnomasi",
-    metaDescription: "Xolmurod  va Ruxshonaning 2026-yil 5-apreldagi to'y taklifnomasi.",
+    metaDescription: "Xolmurod  va Ruxshonaning 2026-yil 11-apreldagi to'y taklifnomasi.",
     ariaIntro: "Taklifnoma konverti",
     ariaEnvelope: "Muhrlangan qog'oz konvert",
     ariaWeddingDate: "To'y sanasi",
-    ariaCalendar: "2026-yil aprel kalendari, 5-aprel belgilangan",
+    ariaCalendar: "2026-yil aprel kalendari, 11-aprel belgilangan",
     ariaWeddingDay: "To'y kuni",
     ariaOrnamentHero: "Yoshlar ismlari tushirilgan an'anaviy sahifa",
     ariaVenueDetails: "To'yxona manzili",
