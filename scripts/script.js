@@ -7,7 +7,7 @@ const languageButtons = document.querySelectorAll(".language-option");
 const musicToggleBtn = document.getElementById("musicToggleBtn");
 const backgroundMusic = document.getElementById("backgroundMusic");
 
-const targetWeddingDate = new Date("2026-04-11T18:00:00+05:00").getTime();
+const targetWeddingDate = new Date("2026-05-12T18:00:00+05:00").getTime();
 const OPENING_DURATION_MS = 1000;
 const DEFAULT_LANGUAGE = "uz";
 const LANGUAGE_STORAGE_KEY = "weddingInvitationLanguage";
@@ -19,8 +19,8 @@ const ONE_DAY_MS = ONE_HOUR_MS * 24;
 
 const LOCALES = {
   ru: {
-    pageTitle: "Холмурад и Рухшана| Свадебное приглашение",
-    metaDescription: "Свадебное приглашение Холмурад а и Рухшана на 5 апреля 2026 года.",
+    pageTitle: "Мухаммаджон и Дилсора| Свадебное приглашение",
+    metaDescription: "Свадебное приглашение Мухаммаджон а и Дилсора на 5 апреля 2026 года.",
     ariaIntro: "Конверт с приглашением",
     ariaEnvelope: "Запечатанный бумажный конверт",
     ariaWeddingDate: "Дата свадьбы",
@@ -32,9 +32,9 @@ const LOCALES = {
     envelopeTopNote:
       "<span class=\"flap-note-top\">ВЫ</span><span class=\"flap-note-middle\">ПРИГЛАШЕНЫ</span><span class=\"flap-note-script\">на свадьбу</span>",
     withLove: "с любовью,",
-    signatureNames: "Холмурад\u00a0и\u00a0Рухшана",
+    signatureNames: "Мухаммаджон\u00a0и\u00a0Дилсора",
     ornamentNames:
-      "<span class=\"ornament-name-line\">Холмурад</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Рухшана</span>",
+      "<span class=\"ornament-name-line\">Мухаммаджон</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Дилсора</span>",
     ornamentMessage: "Спешим сообщить<br />радостную новость:<br />мы женимся!",
     ornamentDay: "05",
     ornamentMonth: "04",
@@ -71,12 +71,12 @@ const LOCALES = {
     musicPauseLabel: "Остановить музыку",
   },
   uz: {
-    pageTitle: "Xolmurod  va Ruxshona | To'y taklifnomasi",
-    metaDescription: "Xolmurod  va Ruxshonaning 2026-yil 11-apreldagi to'y taklifnomasi.",
+    pageTitle: "Muxammadjon  va Dilsora | To'y taklifnomasi",
+    metaDescription: "Muxammadjon  va Dilsoraning 2026-yil 12-maydagi to'y taklifnomasi.",
     ariaIntro: "Taklifnoma konverti",
     ariaEnvelope: "Muhrlangan qog'oz konvert",
     ariaWeddingDate: "To'y sanasi",
-    ariaCalendar: "2026-yil aprel kalendari, 11-aprel belgilangan",
+    ariaCalendar: "2026-yil may kalendari, 12-may belgilangan",
     ariaWeddingDay: "To'y kuni",
     ariaOrnamentHero: "Yoshlar ismlari tushirilgan an'anaviy sahifa",
     ariaVenueDetails: "To'yxona manzili",
@@ -84,9 +84,9 @@ const LOCALES = {
     envelopeTopNote:
       "<span class=\"flap-note-top\">SIZNI</span><span class=\"flap-note-middle\">VISOL OQSHOMIGA</span><span class=\"flap-note-script\">taklif etamiz</span>",
     withLove: "muhabbat ila,",
-    signatureNames: "Xolmurod \u00a0va\u00a0Ruxshona",
+    signatureNames: "Muxammadjon \u00a0va\u00a0Dilsora",
     ornamentNames:
-      "<span class=\"ornament-name-line\">Xolmurod </span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Ruxshona</span>",
+      "<span class=\"ornament-name-line\">Muxammadjon </span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Dilsora</span>",
     ornamentMessage: "Quvonchli yangilik:<br />biz turmush<br />quramiz!",
     ornamentDay: "05",
     ornamentMonth: "04",
@@ -95,7 +95,7 @@ const LOCALES = {
     openHere: "ochish",
     lead: "Hayotimizdagi eng baxtli kunlardan biri - nikoh to'yimizni siz bilan birga nishonlashni niyat qildik.<br /><br />Sizni ushbu kechamizga samimiy taklif etamiz.<br /><br /><strong>Quvonchli kunimizda aziz mehmonimiz bo'lishingizni intizorlik bilan kutamiz.</strong>",
     scrollHint: "Pastga tushuring",
-    calendarMonth: "Aprel, 2026",
+    calendarMonth: "May, 2026",
     weekdayMon: "DU",
     weekdayTue: "SE",
     weekdayWed: "CHOR",
@@ -104,9 +104,9 @@ const LOCALES = {
     weekdaySat: "SHA",
     weekdaySun: "YA",
     locationTitle: "To'y manzili",
-    venueName: "Afsona To'yxonasi",
-    venueAddress: "Buxoro shahar",
-    venueLandmark: "Mo'ljal: Buxoro viloyati sudi dan o‘tgandan keyin",
+    venueName: "Otajon ota To'yxonasi",
+    venueAddress: "Buxoro viloyati",
+    venueAddresstuman: "Qorako'l tumani",
     mapLinkYandex: "Yandex xarita",
     mapLinkGoogle: "Google xarita",
     countdownTitle: "Har lahzani sanayapmiz",
