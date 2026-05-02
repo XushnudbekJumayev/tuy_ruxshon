@@ -7,7 +7,7 @@ const languageButtons = document.querySelectorAll(".language-option");
 const musicToggleBtn = document.getElementById("musicToggleBtn");
 const backgroundMusic = document.getElementById("backgroundMusic");
 
-const targetWeddingDate = new Date("2026-05-12T18:00:00+05:00").getTime();
+const targetWeddingDate = new Date("2026-05-19T18:00:00Z").getTime();
 const OPENING_DURATION_MS = 1000;
 const DEFAULT_LANGUAGE = "uz";
 const LANGUAGE_STORAGE_KEY = "weddingInvitationLanguage";
@@ -20,11 +20,11 @@ const ONE_DAY_MS = ONE_HOUR_MS * 24;
 const LOCALES = {
   ru: {
     pageTitle: "Мухаммаджон и Дилсора| Свадебное приглашение",
-    metaDescription: "Свадебное приглашение Мухаммаджон а и Дилсора на 5 апреля 2026 года.",
+    metaDescription: "Свадебное приглашение Мухаммаджон а и Дилсора на 19 апреля 2026 года.",
     ariaIntro: "Конверт с приглашением",
     ariaEnvelope: "Запечатанный бумажный конверт",
     ariaWeddingDate: "Дата свадьбы",
-    ariaCalendar: "Календарь апреля 2026 с выделенным 5 апреля",
+    ariaCalendar: "Календарь апреля 2026 с выделенным 19 апреля",
     ariaWeddingDay: "День свадьбы",
     ariaOrnamentHero: "Традиционная страница с именами молодоженов",
     ariaVenueDetails: "Место проведения",
@@ -36,14 +36,14 @@ const LOCALES = {
     ornamentNames:
       "<span class=\"ornament-name-line\">Мухаммаджон</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Дилсора</span>",
     ornamentMessage: "Спешим сообщить<br />радостную новость:<br />мы женимся!",
-    ornamentDay: "05",
-    ornamentMonth: "04",
+    ornamentDay: "19",
+    ornamentMonth: "05",
     ornamentYear: "26",
     heroNames: "Дорогие&nbsp;наши<br />родные&nbsp;и&nbsp;<span class=\"no-break\">близкие!</span>",
     openHere: "нажмите",
     lead: "В этот прекрасный день мы соединяем наши сердца и начинаем новую историю - историю нашей любви.<br /><br />Будем счастливы разделить радость этого особенного момента вместе с вами.<br /><br /><strong>С любовью приглашаем вас на нашу свадьбу.</strong>",
     scrollHint: "Прокрутите вниз",
-    calendarMonth: "Aпрель, 2026",
+    calendarMonth: "Mай, 2026",
     weekdayMon: "ПН",
     weekdayTue: "ВТ",
     weekdayWed: "СР",
@@ -52,11 +52,11 @@ const LOCALES = {
     weekdaySat: "СБ",
     weekdaySun: "ВС",
     locationTitle: "Место проведения",
-    venueName: "ресторан Афсана",
+    venueName: "ресторан Отажон ота",
     venueAddress: "город Бухара",
-    venueLandmark: "Ориентир:После прохождения Бухарского регионального суда",
+    venueAddresstuman: "Каракульский район",
     mapLinkYandex: "Яндекс Карты",
-    mapLinkGoogle: "Google Maps",
+    mapLinkGoogle: "Google Карты",
     countdownTitle: "Считаем каждое мгновение",
     unitDays: "Дней",
     unitHours: "Часов",
@@ -72,11 +72,11 @@ const LOCALES = {
   },
   uz: {
     pageTitle: "Muxammadjon  va Dilsora | To'y taklifnomasi",
-    metaDescription: "Muxammadjon  va Dilsoraning 2026-yil 12-maydagi to'y taklifnomasi.",
+    metaDescription: "Muxammadjon  va Dilsoraning 2026-yil 19-maydagi to'y taklifnomasi.",
     ariaIntro: "Taklifnoma konverti",
     ariaEnvelope: "Muhrlangan qog'oz konvert",
     ariaWeddingDate: "To'y sanasi",
-    ariaCalendar: "2026-yil may kalendari, 12-may belgilangan",
+    ariaCalendar: "2026-yil may kalendari, 19-may belgilangan",
     ariaWeddingDay: "To'y kuni",
     ariaOrnamentHero: "Yoshlar ismlari tushirilgan an'anaviy sahifa",
     ariaVenueDetails: "To'yxona manzili",
@@ -88,8 +88,8 @@ const LOCALES = {
     ornamentNames:
       "<span class=\"ornament-name-line\">Muxammadjon </span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Dilsora</span>",
     ornamentMessage: "Quvonchli yangilik:<br />biz turmush<br />quramiz!",
-    ornamentDay: "05",
-    ornamentMonth: "04",
+    ornamentDay: "19",
+    ornamentMonth: "05",
     ornamentYear: "26",
     heroNames: "Aziz\u00a0va\u00a0qadrdon<br /><span class=\"no-break\">insonimiz!</span>",
     openHere: "ochish",
