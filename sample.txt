@@ -1,0 +1,19 @@
+Muxammadjon  va Dilsoraning 2026-yil 19-maydagi
+May, 2026
+
+
+
+locationTitle: "To'y manzili",
+venueName: "Otajon ota To'yxonasi",
+venueAddress: "Buxoro viloyati",
+venueAddresstuman: "Qorako'l tumani",
+mapLinkYandex: "Yandex xarita",
+
+
+
+Salohiddinov Yigitali Normurodova Nafisa
+
+Sana: 21-iyun
+Vaqt: 19:30
+Manzil: Peshku tumani
+Bozorobod to'yxonasi

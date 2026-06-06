@@ -7,7 +7,7 @@ const languageButtons = document.querySelectorAll(".language-option");
 const musicToggleBtn = document.getElementById("musicToggleBtn");
 const backgroundMusic = document.getElementById("backgroundMusic");
 
-const targetWeddingDate = new Date("2026-05-19T18:00:00Z").getTime();
+const targetWeddingDate = new Date("2026-06-21T19:30:00Z").getTime();
 const OPENING_DURATION_MS = 1000;
 const DEFAULT_LANGUAGE = "uz";
 const LANGUAGE_STORAGE_KEY = "weddingInvitationLanguage";
@@ -19,12 +19,12 @@ const ONE_DAY_MS = ONE_HOUR_MS * 24;
 
 const LOCALES = {
   ru: {
-    pageTitle: "Мухаммаджон и Дилсора| Свадебное приглашение",
-    metaDescription: "Свадебное приглашение Мухаммаджон а и Дилсора на 19 апреля 2026 года.",
+    pageTitle: "Йигитали и Нафиса| Свадебное приглашение",
+    metaDescription: "Свадебное приглашение Йигитали а и Нафиса на 21 Июн 2026 года.",
     ariaIntro: "Конверт с приглашением",
     ariaEnvelope: "Запечатанный бумажный конверт",
     ariaWeddingDate: "Дата свадьбы",
-    ariaCalendar: "Календарь апреля 2026 с выделенным 19 апреля",
+    ariaCalendar: "Календарь Июн 2026 с выделенным 21 Июн",
     ariaWeddingDay: "День свадьбы",
     ariaOrnamentHero: "Традиционная страница с именами молодоженов",
     ariaVenueDetails: "Место проведения",
@@ -32,18 +32,18 @@ const LOCALES = {
     envelopeTopNote:
       "<span class=\"flap-note-top\">ВЫ</span><span class=\"flap-note-middle\">ПРИГЛАШЕНЫ</span><span class=\"flap-note-script\">на свадьбу</span>",
     withLove: "с любовью,",
-    signatureNames: "Мухаммаджон\u00a0и\u00a0Дилсора",
+    signatureNames: "Йигитали\u00a0и\u00a0Нафиса",
     ornamentNames:
-      "<span class=\"ornament-name-line\">Мухаммаджон</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Дилсора</span>",
+      "<span class=\"ornament-name-line\">Йигитали</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Нафиса</span>",
     ornamentMessage: "Спешим сообщить<br />радостную новость:<br />мы женимся!",
-    ornamentDay: "19",
-    ornamentMonth: "05",
+    ornamentDay: "21",
+    ornamentMonth: "06",
     ornamentYear: "26",
     heroNames: "Дорогие&nbsp;наши<br />родные&nbsp;и&nbsp;<span class=\"no-break\">близкие!</span>",
     openHere: "нажмите",
     lead: "В этот прекрасный день мы соединяем наши сердца и начинаем новую историю - историю нашей любви.<br /><br />Будем счастливы разделить радость этого особенного момента вместе с вами.<br /><br /><strong>С любовью приглашаем вас на нашу свадьбу.</strong>",
     scrollHint: "Прокрутите вниз",
-    calendarMonth: "Mай, 2026",
+    calendarMonth: "Июн, 2026",
     weekdayMon: "ПН",
     weekdayTue: "ВТ",
     weekdayWed: "СР",
@@ -52,9 +52,9 @@ const LOCALES = {
     weekdaySat: "СБ",
     weekdaySun: "ВС",
     locationTitle: "Место проведения",
-    venueName: "ресторан Отажон ота",
-    venueAddress: "город Бухара",
-    venueAddresstuman: "Каракульский район",
+    venueName: "ресторан Бозоробод",
+    venueAddress: "Бухарская область",
+    venueAddresstuman: "Пешку район",
     mapLinkYandex: "Яндекс Карты",
     mapLinkGoogle: "Google Карты",
     countdownTitle: "Считаем каждое мгновение",
@@ -69,14 +69,15 @@ const LOCALES = {
     languageUzLabel: "O'zbekcha",
     musicPlayLabel: "Включить музыку",
     musicPauseLabel: "Остановить музыку",
+    staticWeddingDate: "21 Июня 2026, 19:30",
   },
   uz: {
-    pageTitle: "Muxammadjon  va Dilsora | To'y taklifnomasi",
-    metaDescription: "Muxammadjon  va Dilsoraning 2026-yil 19-maydagi to'y taklifnomasi.",
+    pageTitle: "Yigitali  va Nafisa | To'y taklifnomasi",
+    metaDescription: "Yigitali  va Nafisaning 2026-yil 21-iyundagi to'y taklifnomasi.",
     ariaIntro: "Taklifnoma konverti",
     ariaEnvelope: "Muhrlangan qog'oz konvert",
     ariaWeddingDate: "To'y sanasi",
-    ariaCalendar: "2026-yil may kalendari, 19-may belgilangan",
+    ariaCalendar: "2026-yil iyun kalendari, 21-iyun belgilangan",
     ariaWeddingDay: "To'y kuni",
     ariaOrnamentHero: "Yoshlar ismlari tushirilgan an'anaviy sahifa",
     ariaVenueDetails: "To'yxona manzili",
@@ -84,18 +85,18 @@ const LOCALES = {
     envelopeTopNote:
       "<span class=\"flap-note-top\">SIZNI</span><span class=\"flap-note-middle\">VISOL OQSHOMIGA</span><span class=\"flap-note-script\">taklif etamiz</span>",
     withLove: "muhabbat ila,",
-    signatureNames: "Muxammadjon \u00a0va\u00a0Dilsora",
+    signatureNames: "Yigitali \u00a0va\u00a0Nafisa",
     ornamentNames:
-      "<span class=\"ornament-name-line\">Muxammadjon </span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Dilsora</span>",
+      "<span class=\"ornament-name-line\">Yigitali </span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Nafisa</span>",
     ornamentMessage: "Quvonchli yangilik:<br />biz turmush<br />quramiz!",
-    ornamentDay: "19",
-    ornamentMonth: "05",
+    ornamentDay: "21",
+    ornamentMonth: "06",
     ornamentYear: "26",
-    heroNames: "Aziz\u00a0va\u00a0qadrdon<br /><span class=\"no-break\">insonimiz!</span>",
+    heroNames: "Aziz\u00a0va\u00a0qadrdon<br /><span class=\"no-break\">Mehmonimiz!</span>",
     openHere: "ochish",
     lead: "Hayotimizdagi eng baxtli kunlardan biri - nikoh to'yimizni siz bilan birga nishonlashni niyat qildik.<br /><br />Sizni ushbu kechamizga samimiy taklif etamiz.<br /><br /><strong>Quvonchli kunimizda aziz mehmonimiz bo'lishingizni intizorlik bilan kutamiz.</strong>",
     scrollHint: "Pastga tushuring",
-    calendarMonth: "May, 2026",
+    calendarMonth: "Iyun, 2026",
     weekdayMon: "DU",
     weekdayTue: "SE",
     weekdayWed: "CHOR",
@@ -104,9 +105,9 @@ const LOCALES = {
     weekdaySat: "SHA",
     weekdaySun: "YA",
     locationTitle: "To'y manzili",
-    venueName: "Otajon ota To'yxonasi",
+    venueName: "Bozorobod  To'yxonasi",
     venueAddress: "Buxoro viloyati",
-    venueAddresstuman: "Qorako'l tumani",
+    venueAddresstuman: "Peshku tumani",
     mapLinkYandex: "Yandex xarita",
     mapLinkGoogle: "Google xarita",
     countdownTitle: "Har lahzani sanayapmiz",
@@ -121,6 +122,7 @@ const LOCALES = {
     languageUzLabel: "O'zbekcha",
     musicPlayLabel: "Musiqani yoqish",
     musicPauseLabel: "Musiqani to'xtatish",
+    staticWeddingDate: "21 Iyun 2026, 19:30",
   },
 };
 
@@ -495,3 +497,23 @@ const countdownInterval = window.setInterval(() => {
     window.clearInterval(countdownInterval);
   }
 }, 1500);
+
+function toggleCountdownState() {
+  const countdown = document.getElementById("countdown");
+  const countdownStatic = document.getElementById("countdownStatic");
+  if (!countdown || !countdownStatic) return;
+
+  if (countdown.classList.contains("hide-state")) {
+    countdown.classList.remove("hide-state");
+    countdownStatic.classList.remove("show-state");
+    countdownStatic.setAttribute("aria-hidden", "true");
+    countdown.setAttribute("aria-hidden", "false");
+  } else {
+    countdown.classList.add("hide-state");
+    countdownStatic.classList.add("show-state");
+    countdownStatic.setAttribute("aria-hidden", "false");
+    countdown.setAttribute("aria-hidden", "true");
+  }
+}
+
+window.setInterval(toggleCountdownState, 2500);

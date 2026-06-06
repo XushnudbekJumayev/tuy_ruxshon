@@ -447,11 +447,11 @@ body.intro-active {
 
 .flap-signature strong {
   display: block;
-  font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 3.2vw, 2.7rem);
-  font-weight: 700;
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 5.5vw, 4rem);
+  font-weight: 400;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: none;
   white-space: nowrap;
 }
 
@@ -743,10 +743,10 @@ h1 {
   white-space: normal;
   overflow-wrap: anywhere;
   text-wrap: balance;
-  font-family: var(--font-script);
-  font-size: clamp(3.9rem, 11.6vw, 9.1rem);
-  font-weight: 400;
-  line-height: 0.9;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.1;
   letter-spacing: 0.012em;
 }
 
@@ -2463,14 +2463,14 @@ body.invitation-visible .heritage-horn--right {
 
 .heritage-names .ornament-name-amp {
   display: block;
-  margin: 0;
+  margin: clamp(0.2rem, 0.8vw, 0.4rem) 0;
   color: #aa1410;
-  font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2vw, 1.62rem);
-  font-weight: 600;
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 400;
   line-height: 1;
   letter-spacing: 0.02em;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .heritage-couple {
@@ -3112,6 +3112,54 @@ body.invitation-visible .heritage-horn--right {
     width: clamp(134px, 43vw, 170px);
     bottom: -3.45rem;
   }
+}
+
+/* Countdown Wrapper and Static Date */
+.countdown-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: clamp(80px, 15vw, 120px);
+  width: 100%;
+  perspective: 1000px;
+}
+
+.countdown {
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease, visibility 0.8s ease;
+  opacity: 1;
+  visibility: visible;
+  transform: rotateX(0deg) translateY(0);
+  transform-origin: center center -40px;
+}
+
+.countdown.hide-state {
+  opacity: 0;
+  visibility: hidden;
+  transform: rotateX(90deg) translateY(-40px);
+  position: absolute;
+}
+
+.countdown-static {
+  position: absolute;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease, visibility 0.8s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: rotateX(-90deg) translateY(40px);
+  transform-origin: center center -40px;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 500;
+  color: var(--ink-red);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.countdown-static.show-state {
+  opacity: 1;
+  visibility: visible;
+  transform: rotateX(0deg) translateY(0);
+  position: relative;
 }
 
 @media (prefers-reduced-motion: reduce) {
