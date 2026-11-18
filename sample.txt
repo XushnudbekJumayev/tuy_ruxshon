@@ -1,19 +1,20 @@
-Muxammadjon  va Dilsoraning 2026-yil 19-maydagi
-May, 2026
-
-
+Munisa va Abdurasulning 2026-yil 15-dekabrdagi
+Dekabr, 2026
 
 locationTitle: "To'y manzili",
-venueName: "Otajon ota To'yxonasi",
-venueAddress: "Buxoro viloyati",
-venueAddresstuman: "Qorako'l tumani",
+venueName: "Oq saroy to'yxonasi",
+venueAddress: "Buxoro viloyati, Peshku tumani",
+venueAddresstuman: "Mo'ljal: Peshku futbol stadionidan keyin",
 mapLinkYandex: "Yandex xarita",
+mapLinkGoogle: "Google xarita",
 
+Kelin: Munisa
+Kuyov: Abdurasul
 
-
-Salohiddinov Yigitali Normurodova Nafisa
-
-Sana: 21-iyun
+Sana: 15-dekabr 2026
 Vaqt: 19:30
-Manzil: Peshku tumani
-Bozorobod to'yxonasi
+Manzil: Buxoro viloyati, Peshku tumani
+To'yxona: Oq saroy
+Mo'ljal: Peshku futbol stadionidan keyin
+Google Maps: https://maps.app.goo.gl/6Xey7d41LYSPfh817
+Yandex Maps: https://yandex.uz/maps/-/CXWMADLt
